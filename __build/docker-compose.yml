@@ -1,0 +1,45 @@
+﻿version: '3'
+services:
+  nginx:
+    image: smrtab/redinstagram:nginx
+    build:
+        context: ../
+        dockerfile: __build/web.dockerfile
+    container_name: redinstagram_nginx
+    volumes:
+        - ../server:/redinstagram/server
+        - ../client:/redinstagram/client
+        - ../logs/nginx:/var/log/nginx
+    ports:
+     - "80:80"
+     - "25:25"
+    links:
+     - php
+    depends_on:
+     - php
+  php:
+    image: smrtab/redinstagram:php
+    build:
+        context: ../
+        dockerfile: __build/php.dockerfile
+    container_name: redinstagram_php
+    volumes:
+        - ../server:/redinstagram/server
+        - ../client:/redinstagram/client
+        - ../logs/app:/redinstagram/server/var/logs
+        - ../logs/msmtp:/var/log/msmtp
+    links:
+     - db
+  db:
+    image: smrtab/redinstagram:db
+    build:
+        context: ../
+        dockerfile: __build/db.dockerfile
+    container_name: redinstagram_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+     - "5444:5432"
+
+volumes:
+  pgdata:
