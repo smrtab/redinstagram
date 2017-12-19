@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
     constructor(public httpService: HttpService) { }
 
     ngOnInit() {
-        this.httpService.getGirls(true);
+        this.httpService.getGirls();
     }
 }

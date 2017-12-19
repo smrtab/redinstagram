@@ -19,7 +19,7 @@ export class HttpService {
     constructor(private http: HttpClient,
                 private registry: RegistryService) { }
 
-    getGirls(sync: boolean = false): Observable<Girl[]> {
+    getGirls(sync: boolean = true): Observable<Girl[]> {
 
         if ((sync === false) && (this.registry.girls))
             return this.registry.girls;

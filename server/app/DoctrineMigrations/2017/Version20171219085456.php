@@ -14,15 +14,14 @@ class Version20171219085456 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SEQUENCE girls_id_seq;');
-        $this->addSql('CREATE TABLE girls (
-          id int NOT NULL DEFAULT nextval(\'girls_id_seq\'),
-          move_in_date date default NULL,
-          street varchar(255) NOT NULL,
-          post_code int NOT NULL,
-          town varchar(100) NOT NULL,
-          country varchar(100) NOT NULL,
-          email varchar(255) NOT NULL,
-          CONSTRAINT girls_pkey PRIMARY KEY (id));');
+        $this->addSql('CREATE TABLE girls(
+                              id id NOT NULL DEFAULT nextval(\'girls_id_seq\'),
+                              name character varying(512) NOT NULL,
+                              tag character varying(512) NOT NULL,
+                              description text,
+                              preview character varying(255)
+                              CONSTRAINT girls_pkey PRIMARY KEY (id),
+                              CONSTRAINT girls_tag_unique UNIQUE (tag));');
     }
 
     public function down(Schema $schema)
