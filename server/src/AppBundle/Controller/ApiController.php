@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use AppBundle\Entity\Girl;
 
 class ApiController extends Controller
 {
@@ -14,7 +15,12 @@ class ApiController extends Controller
      */
     public function getAllAction()
     {
-        $result = $this->get("doctrine")->getManager()->getRepository()->findAll();
+        $result = $this
+                    ->get("doctrine")
+                    ->getManager()
+                    ->getRepository("AppBundle:Girl")
+                    ->findAll();
+
         return $this->json($result);
     }
 
@@ -24,7 +30,12 @@ class ApiController extends Controller
      */
     public function getGirlAction($id)
     {
-        $result = $this->get("doctrine")->getManager()->getRepository()->find($id);
+        $result = $this
+                    ->get("doctrine")
+                    ->getManager()
+                    ->getRepository("AppBundle:Girl")
+                    ->find($id);
+
         return $this->json($result);
     }
 

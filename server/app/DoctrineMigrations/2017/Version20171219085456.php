@@ -15,11 +15,12 @@ class Version20171219085456 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SEQUENCE girls_id_seq;');
         $this->addSql('CREATE TABLE girls(
-                              id id NOT NULL DEFAULT nextval(\'girls_id_seq\'),
+                              id integer NOT NULL DEFAULT nextval(\'girls_id_seq\'),
                               name character varying(512) NOT NULL,
                               tag character varying(512) NOT NULL,
                               description text,
-                              preview character varying(255)
+                              preview character varying(255),
+                              content character varying(1024) NOT NULL,
                               CONSTRAINT girls_pkey PRIMARY KEY (id),
                               CONSTRAINT girls_tag_unique UNIQUE (tag));');
     }
@@ -27,6 +28,7 @@ class Version20171219085456 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
+        $this->addSql('DROP TABLE girls');
+        $this->addSql('DROP SEQUENCE girls_id_seq;');
     }
 }

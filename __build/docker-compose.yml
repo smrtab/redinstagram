@@ -37,9 +37,9 @@ services:
         dockerfile: __build/db.dockerfile
     container_name: redinstagram_db
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata_redinstagram:/var/lib/postgresql/data
     ports:
      - "5444:5432"
 
 volumes:
-  pgdata:
+  pgdata_redinstagram:
