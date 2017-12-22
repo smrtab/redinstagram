@@ -170,38 +170,4 @@ class Girl
         return $this->preview;
     }
     
-
-    /**
-     * Add content
-     *
-     * @param \AppBundle\Entity\Content $content
-     *
-     * @return Girl
-     */
-    public function addContent(\AppBundle\Entity\Content $content)
-    {
-        $this->contents[] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Remove content
-     *
-     * @param \AppBundle\Entity\Content $content
-     */
-    public function removeContent(\AppBundle\Entity\Content $content)
-    {
-        $this->contents->removeElement($content);
-    }
-
-    /**
-     * Get contents
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getContents()
-    {
-        return $this->contents;
-    }
 }
