@@ -9,6 +9,7 @@ import { ShowComponent } from './show/show.component';
 
 import { HttpService } from './services/http.service';
 import { RegistryService } from './services/registry.service';
+import { RoutesModule } from './routes/routes.module';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { RegistryService } from './services/registry.service';
     ],
     imports: [
         BrowserModule,
-        HttpClientModule
+        HttpClientModule,
+        RoutesModule,
     ],
     providers: [
         HttpService,

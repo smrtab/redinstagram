@@ -10,7 +10,6 @@ export class ListComponent implements OnInit {
 
   constructor(public registry: RegistryService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
