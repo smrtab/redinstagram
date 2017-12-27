@@ -17,6 +17,7 @@ class Girl
     public function __construct()
     {
         $this->contents = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -62,6 +63,21 @@ class Girl
      * @ORM\OneToMany(targetEntity="Content", mappedBy="girl")
      */
     private $contents;
+
+    /**
+     * @var ArrayCollection::class
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="girls")
+     * @ORM\JoinTable(
+     *  name="category_girl",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="girl_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *  }
+     * )
+     */
+    private $categories;
 
 
     /**
@@ -203,5 +219,39 @@ class Girl
     public function getContents()
     {
         return $this->contents;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Girl
+     */
+    public function addCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \AppBundle\Entity\Category $category
+     */
+    public function removeCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

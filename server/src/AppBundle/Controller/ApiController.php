@@ -39,4 +39,18 @@ class ApiController extends Controller
         return $this->json($result);
     }
 
+    /**
+     * @Route("/api/categories")
+     * @Method("GET")
+     */
+    public function getCategoriesAction($id)
+    {
+        $result = $this
+            ->get("doctrine")
+            ->getManager()
+            ->getRepository("AppBundle:Category")
+            ->findAll();
+
+        return $this->json($result);
+    }
 }

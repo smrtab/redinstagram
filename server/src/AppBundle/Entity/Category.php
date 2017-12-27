@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+
+    public function __construct()
+    {
+        $this->girls = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -27,6 +34,12 @@ class Category
      * @ORM\Column(name="name", type="string", length=512)
      */
     private $name;
+
+    /**
+     * @var ArrayCollection::class
+     * @ORM\ManyToMany(targetEntity="Girl", mappedBy="categories")
+     */
+    private $girls;
 
 
     /**
@@ -61,5 +74,39 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add girl
+     *
+     * @param \AppBundle\Entity\Girl $girl
+     *
+     * @return Category
+     */
+    public function addGirl(\AppBundle\Entity\Girl $girl)
+    {
+        $this->girls[] = $girl;
+
+        return $this;
+    }
+
+    /**
+     * Remove girl
+     *
+     * @param \AppBundle\Entity\Girl $girl
+     */
+    public function removeGirl(\AppBundle\Entity\Girl $girl)
+    {
+        $this->girls->removeElement($girl);
+    }
+
+    /**
+     * Get girls
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGirls()
+    {
+        return $this->girls;
     }
 }
